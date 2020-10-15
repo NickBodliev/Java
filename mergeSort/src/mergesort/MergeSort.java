@@ -24,56 +24,32 @@ public class MergeSort {
                 v1[i] = v[stIndex+i];
             for(j = 0; j<v2.length; j++)
                 v2[j] = v[m+1+j];
-            /*
-            System.out.println("Stampo il vettore v1 con indici da "+stIndex+" a "+m);
-            for(i=0; i<v1.length; i++)
-                System.out.print(v1[i]+" ");
-            System.out.println();
-            System.out.println("Stampo il vettore v2 con indici da "+(m+1)+" a "+finIndex);
-            for(i=0; i<v2.length; i++)
-                System.out.print(v2[i]+" ");
-            System.out.println();
-            */
-            
             
             i = 0;
             j = 0;
             int k = stIndex;
             while(i < v1.length && j < v2.length){
-                if(v1[i] < v2[j])
-                {
+                if(v1[i] < v2[j]){
                     v[k] = v1[i];
                     k = k + 1;
                     i = i + 1;
                 }
-                else
-                {
+                else{
                     v[k] = v2[j];
                     k = k + 1;
                     j = j + 1;
                 }
             }
             int z;
-            for(z = i; z < v1.length; z++)
-            {
+            for(z = i; z < v1.length; z++){
                 v[k] = v1[z];
                 k = k + 1;
             }
-            for(z = j; z < v2.length; z++)
-            {
+            for(z = j; z < v2.length; z++){
                 v[k] = v2[z];
                 k = k + 1;
             }
-            /*
-            for(i = stIndex; i <= finIndex; i++)
-                System.out.print(v[i] + " ");
-            System.out.println();
-            System.out.println("*******************************");
-            */
-            
         }
-        
-        
     }
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
@@ -84,6 +60,7 @@ public class MergeSort {
             for(int i=0;i<arr.length;i++)
                 arr[i] = sc.nextInt();
             sort(arr, 0, arr.length-1);
+            System.out.println("Here we go, the sorted array is:");
             for(int i = 0; i<arr.length; i++)
                 System.out.print(arr[i] + " ");
             System.out.println();
