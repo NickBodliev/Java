@@ -1,31 +1,79 @@
 package mergesort;
 import java.util.Scanner;
 public class MergeSort {
+    
     static int[] sort(int v[], int stIndex, int finIndex){
         if(stIndex < finIndex)
         {
             int m = (stIndex + finIndex) / 2;
-            sort(v, stIndex, finIndex/2);
+            sort(v, stIndex, m);
             sort(v, m+1, finIndex);
-            merge(v, stIndex, finIndex);
+            merge(v, stIndex, m, finIndex);
         }
         return v;
     }
     
-    static void merge(int v[], int stIndex, int finIndex){
-        int buf;
-        for(int i=stIndex; i<=finIndex; i++)
-        {
-            for(int j=i+1; j<=finIndex; j++)
-            {
-                if(v[j] < v[i])
+    static void merge(int v[], int stIndex, int m, int finIndex){
+        if(finIndex - stIndex < 1) //se il vettore v contiene un valore solo 
+            return;
+        else{                   //se il vettore v contiene più di un valore
+            int v1 [] = new int[m-stIndex+1];
+            int v2 [] = new int[finIndex-m];
+            int i, j;
+            for(i = 0; i < v1.length; i++)
+                v1[i] = v[stIndex+i];
+            for(j = 0; j<v2.length; j++)
+                v2[j] = v[m+1+j];
+            /*
+            System.out.println("Stampo il vettore v1 con indici da "+stIndex+" a "+m);
+            for(i=0; i<v1.length; i++)
+                System.out.print(v1[i]+" ");
+            System.out.println();
+            System.out.println("Stampo il vettore v2 con indici da "+(m+1)+" a "+finIndex);
+            for(i=0; i<v2.length; i++)
+                System.out.print(v2[i]+" ");
+            System.out.println();
+            */
+            
+            
+            i = 0;
+            j = 0;
+            int k = stIndex;
+            while(i < v1.length && j < v2.length){
+                if(v1[i] < v2[j])
                 {
-                    buf = v[i];
-                    v[i] = v[j];
-                    v[j] = buf;
+                    v[k] = v1[i];
+                    k = k + 1;
+                    i = i + 1;
+                }
+                else
+                {
+                    v[k] = v2[j];
+                    k = k + 1;
+                    j = j + 1;
                 }
             }
+            int z;
+            for(z = i; z < v1.length; z++)
+            {
+                v[k] = v1[z];
+                k = k + 1;
+            }
+            for(z = j; z < v2.length; z++)
+            {
+                v[k] = v2[z];
+                k = k + 1;
+            }
+            /*
+            for(i = stIndex; i <= finIndex; i++)
+                System.out.print(v[i] + " ");
+            System.out.println();
+            System.out.println("*******************************");
+            */
+            
         }
+        
+        
     }
         public static void main(String[] args) {
             Scanner sc = new Scanner(System.in);
@@ -40,5 +88,4 @@ public class MergeSort {
                 System.out.print(arr[i] + " ");
             System.out.println();
      }
-    
 }
